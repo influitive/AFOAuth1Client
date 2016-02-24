@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, AFOAuthSignatureMethod) {
     AFHMACSHA1SignatureMethod = 2,
 };
 
+typedef void (^AFOAuth1UIFlow)(NSURL *);
+
 @class AFOAuth1Token;
 
 /**
@@ -94,6 +96,7 @@ typedef NS_ENUM(NSUInteger, AFOAuthSignatureMethod) {
                                 accessTokenPath:(NSString *)accessTokenPath
                                    accessMethod:(NSString *)accessMethod
                                           scope:(NSString *)scope
+                                         uiFlow:(AFOAuth1UIFlow)uiFlow
                                         success:(void (^)(AFOAuth1Token *accessToken, id responseObject))success
                                         failure:(void (^)(NSError *error))failure;
 

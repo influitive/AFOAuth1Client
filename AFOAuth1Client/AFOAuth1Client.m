@@ -288,6 +288,7 @@ static NSDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *identifi
                                 accessTokenPath:(NSString *)accessTokenPath
                                    accessMethod:(NSString *)accessMethod
                                           scope:(NSString *)scope
+                                         uiFlow:(AFOAuth1UIFlow)uiFlow
                                         success:(void (^)(AFOAuth1Token *accessToken, id responseObject))success
                                         failure:(void (^)(NSError *error))failure
 {
@@ -334,7 +335,7 @@ static NSDictionary * AFKeychainQueryDictionaryWithIdentifier(NSString *identifi
             self.serviceProviderRequestHandler(request);
         } else {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-            [[UIApplication sharedApplication] openURL:[request URL]];
+            uiFlow([request URL]);
 #else
             [[NSWorkspace sharedWorkspace] openURL:[request URL]];
 #endif
